@@ -1,4 +1,4 @@
-# 🔥 DataForge
+# DataForge
 
 DataForge is an AI-powered CLI tool that generates realistic sample datasets for developers, testers, and data engineers. Just describe what you need in plain English — DataForge handles the rest.
 
