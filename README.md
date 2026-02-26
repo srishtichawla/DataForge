@@ -1,7 +1,5 @@
 # 🔥 DataForge
 
-> **Craft Data. Forge Datasets.**
-
 DataForge is an AI-powered CLI tool that generates realistic sample datasets for developers, testers, and data engineers. Just describe what you need in plain English — DataForge handles the rest.
 
 ---
@@ -137,17 +135,3 @@ git status   # .env should NOT appear here
 - [ ] Level 6 — Direct database push (PostgreSQL, MongoDB)
 
 ---
-
-## 🤝 Contributing
-
-Pull requests are welcome! For major changes, open an issue first to discuss what you'd like to change.
-
----
-
-## 📄 License
-
-MIT License — use freely, credit appreciated.
-
----
-
-<p align="center">Built with 🔥 by DataForge</p>
