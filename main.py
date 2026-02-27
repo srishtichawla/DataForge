@@ -16,9 +16,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-# ─────────────────────────────────────────────
+
 #  Helpers
-# ─────────────────────────────────────────────
+
 
 LOREM_WORDS = (
     "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor "
@@ -76,9 +76,9 @@ def _lorem(words: int) -> str:
     return " ".join(chosen) + "."
 
 
-# ─────────────────────────────────────────────
+
 #  File I/O Tools
-# ─────────────────────────────────────────────
+
 
 @tool
 def write_json(filepath: str, data: dict) -> str:
@@ -162,9 +162,9 @@ def list_output_files(directory: str = ".") -> str:
         return f"Error: {e}"
 
 
-# ─────────────────────────────────────────────
+
 #  User Generator
-# ─────────────────────────────────────────────
+
 
 @tool
 def generate_users(
@@ -247,9 +247,8 @@ def generate_users(
     return {"users": users, "count": len(users)}
 
 
-# ─────────────────────────────────────────────
+
 #  Product Generator
-# ─────────────────────────────────────────────
 
 @tool
 def generate_products(
@@ -310,9 +309,9 @@ def generate_products(
     return {"products": products, "count": len(products)}
 
 
-# ─────────────────────────────────────────────
+
 #  Transaction Generator
-# ─────────────────────────────────────────────
+
 
 @tool
 def generate_transactions(
@@ -366,10 +365,7 @@ def generate_transactions(
 
     return {"transactions": transactions, "count": len(transactions)}
 
-
-# ─────────────────────────────────────────────
 #  Post / Blog Generator
-# ─────────────────────────────────────────────
 
 @tool
 def generate_posts(
@@ -434,9 +430,8 @@ def generate_posts(
     return {"posts": posts, "count": len(posts)}
 
 
-# ─────────────────────────────────────────────
+
 #  Company Generator
-# ─────────────────────────────────────────────
 
 INDUSTRIES = [
     "Technology", "Healthcare", "Finance", "Retail", "Manufacturing",
@@ -520,9 +515,9 @@ def generate_companies(
     return {"companies": companies, "count": len(companies)}
 
 
-# ─────────────────────────────────────────────
+
 #  Event Generator
-# ─────────────────────────────────────────────
+
 
 EVENT_TYPES = ["Conference", "Webinar", "Workshop", "Meetup", "Hackathon", "Summit", "Training", "Networking", "Launch", "AMA"]
 EVENT_TOPICS = ["AI & Machine Learning", "Web Development", "Cybersecurity", "Data Science", "Design",
@@ -614,9 +609,9 @@ def generate_events(
     return {"events": events, "count": len(events)}
 
 
-# ─────────────────────────────────────────────
+
 #  Invoice Generator
-# ─────────────────────────────────────────────
+
 
 SERVICE_ITEMS = [
     "Consulting Services", "Software Development", "Design Work", "Data Analysis",
@@ -700,9 +695,8 @@ def generate_invoices(
     return {"invoices": invoices, "count": len(invoices)}
 
 
-# ─────────────────────────────────────────────
+
 #  Review Generator
-# ─────────────────────────────────────────────
 
 REVIEW_TITLES = {
     5: ["Absolutely amazing!", "Best purchase ever!", "Highly recommend!", "Exceeded expectations!", "Five stars!"],
@@ -766,9 +760,9 @@ def generate_reviews(
     return {"reviews": reviews, "count": len(reviews), "averageRating": avg}
 
 
-# ─────────────────────────────────────────────
+
 #  Location Generator
-# ─────────────────────────────────────────────
+
 
 WORLD_LOCATIONS = [
     ("New York", "USA", 40.7128, -74.0060, "America/New_York", 8_336_817),
@@ -851,9 +845,9 @@ def generate_locations(
 
     return {"locations": locations, "count": len(locations)}
 
-# ─────────────────────────────────────────────
+
 #  Schema Inspector / Merger
-# ─────────────────────────────────────────────
+
 
 @tool
 def summarize_json(filepath: str) -> str:
@@ -932,9 +926,556 @@ def merge_json_files(input_files: List[str], output_file: str, merge_key: str = 
         return f"Error merging files: {e}"
 
 
-# ─────────────────────────────────────────────
+
+#  LEVEL 2 — LOCALE DATA POOLS
+
+LOCALE_DATA = {
+    "en_US": {
+        "first_names": ["Alice", "Bob", "Carol", "David", "Emma", "Frank", "Grace", "Henry",
+                        "Isabella", "Jack", "Kate", "Liam", "Mia", "Noah", "Olivia", "Peter",
+                        "Quinn", "Rachel", "Sam", "Taylor", "Uma", "Victor", "Wendy", "Zoe"],
+        "last_names": ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller",
+                       "Davis", "Martinez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore"],
+        "cities": ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Austin", "Seattle"],
+        "street_suffixes": ["St", "Ave", "Blvd", "Rd", "Ln", "Dr", "Ct", "Way"],
+        "state_or_region": ["CA", "NY", "TX", "FL", "IL", "PA", "OH", "GA"],
+        "zip_format": lambda: str(random.randint(10000, 99999)),
+        "phone_prefix": "+1",
+        "country": "USA",
+        "domain_tld": ".com",
+        "currency": "USD",
+    },
+    "en_IN": {
+        "first_names": ["Aarav", "Ananya", "Arjun", "Diya", "Ishaan", "Kavya", "Krishna",
+                        "Lakshmi", "Meera", "Nikhil", "Priya", "Rahul", "Riya", "Rohan",
+                        "Saanvi", "Siddharth", "Sneha", "Tanvi", "Vivaan", "Zara"],
+        "last_names": ["Sharma", "Verma", "Patel", "Singh", "Kumar", "Gupta", "Shah",
+                       "Mehta", "Joshi", "Nair", "Reddy", "Rao", "Iyer", "Pillai"],
+        "cities": ["Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai", "Kolkata", "Pune", "Ahmedabad"],
+        "street_suffixes": ["Marg", "Road", "Nagar", "Colony", "Lane", "Cross", "Layout"],
+        "state_or_region": ["MH", "DL", "KA", "TN", "WB", "GJ", "RJ", "UP"],
+        "zip_format": lambda: str(random.randint(100000, 999999)),
+        "phone_prefix": "+91",
+        "country": "India",
+        "domain_tld": ".in",
+        "currency": "INR",
+    },
+    "ja_JP": {
+        "first_names": ["Akira", "Haruto", "Hinata", "Hiroshi", "Kenji", "Koharu", "Mei",
+                        "Ren", "Sakura", "Satoshi", "Sora", "Takeshi", "Yui", "Yuki", "Yuto"],
+        "last_names": ["Sato", "Suzuki", "Takahashi", "Tanaka", "Watanabe", "Ito", "Yamamoto",
+                       "Nakamura", "Kobayashi", "Kato", "Yoshida", "Yamada", "Sasaki"],
+        "cities": ["Tokyo", "Osaka", "Kyoto", "Nagoya", "Sapporo", "Fukuoka", "Kobe", "Hiroshima"],
+        "street_suffixes": ["Chome", "Ban", "Go", "Ku", "Shi"],
+        "state_or_region": ["Tokyo", "Osaka", "Kyoto", "Aichi", "Hokkaido", "Fukuoka"],
+        "zip_format": lambda: f"{random.randint(100,999)}-{random.randint(1000,9999)}",
+        "phone_prefix": "+81",
+        "country": "Japan",
+        "domain_tld": ".jp",
+        "currency": "JPY",
+    },
+    "de_DE": {
+        "first_names": ["Anna", "Ben", "Clara", "David", "Elena", "Felix", "Greta", "Hans",
+                        "Ingrid", "Jonas", "Klara", "Lars", "Marie", "Nico", "Petra", "Stefan"],
+        "last_names": ["Muller", "Schmidt", "Schneider", "Fischer", "Weber", "Meyer", "Wagner",
+                       "Becker", "Schulz", "Hoffmann", "Koch", "Richter", "Bauer", "Klein"],
+        "cities": ["Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt", "Stuttgart", "Dusseldorf"],
+        "street_suffixes": ["Strasse", "Weg", "Platz", "Allee", "Gasse", "Ring", "Damm"],
+        "state_or_region": ["Bayern", "NRW", "BW", "Berlin", "Hamburg", "Hessen", "Sachsen"],
+        "zip_format": lambda: str(random.randint(10000, 99999)),
+        "phone_prefix": "+49",
+        "country": "Germany",
+        "domain_tld": ".de",
+        "currency": "EUR",
+    },
+    "fr_FR": {
+        "first_names": ["Amelie", "Antoine", "Camille", "Charlotte", "Claire", "Emma", "Hugo",
+                        "Lea", "Louis", "Lucas", "Manon", "Nathan", "Noemie", "Pierre", "Sophie"],
+        "last_names": ["Martin", "Bernard", "Dubois", "Thomas", "Robert", "Richard", "Petit",
+                       "Durand", "Leroy", "Moreau", "Simon", "Laurent", "Lefebvre", "Michel"],
+        "cities": ["Paris", "Lyon", "Marseille", "Toulouse", "Nice", "Nantes", "Bordeaux", "Lille"],
+        "street_suffixes": ["Rue", "Avenue", "Boulevard", "Place", "Impasse", "Chemin", "Allee"],
+        "state_or_region": ["IDF", "ARA", "PACA", "OCC", "HDF", "NAQ", "BRE", "GES"],
+        "zip_format": lambda: str(random.randint(10000, 99999)),
+        "phone_prefix": "+33",
+        "country": "France",
+        "domain_tld": ".fr",
+        "currency": "EUR",
+    },
+    "es_ES": {
+        "first_names": ["Alejandro", "Ana", "Carlos", "Carmen", "Diego", "Elena", "Fernando",
+                        "Isabel", "Javier", "Laura", "Luis", "Maria", "Miguel", "Pablo", "Sofia"],
+        "last_names": ["Garcia", "Martinez", "Lopez", "Sanchez", "Gonzalez", "Rodriguez",
+                       "Fernandez", "Perez", "Gomez", "Martin", "Jimenez", "Ruiz", "Hernandez"],
+        "cities": ["Madrid", "Barcelona", "Valencia", "Seville", "Zaragoza", "Malaga", "Bilbao"],
+        "street_suffixes": ["Calle", "Avenida", "Plaza", "Paseo", "Carretera", "Camino"],
+        "state_or_region": ["MAD", "CAT", "AND", "VAL", "GAL", "PV", "CAN", "ARA"],
+        "zip_format": lambda: str(random.randint(10000, 99999)),
+        "phone_prefix": "+34",
+        "country": "Spain",
+        "domain_tld": ".es",
+        "currency": "EUR",
+    },
+}
+
+AVAILABLE_LOCALES = list(LOCALE_DATA.keys())
+
+
+def _locale_address(locale: str) -> dict:
+    ld = LOCALE_DATA[locale]
+    return {
+        "street": f"{random.randint(1, 999)} {''.join(random.choices(string.ascii_uppercase, k=1))}{''.join(random.choices(string.ascii_lowercase, k=5))} {random.choice(ld['street_suffixes'])}",
+        "city": random.choice(ld["cities"]),
+        "region": random.choice(ld["state_or_region"]),
+        "postalCode": ld["zip_format"](),
+        "country": ld["country"],
+    }
+
+
+def _locale_phone(locale: str) -> str:
+    prefix = LOCALE_DATA[locale]["phone_prefix"]
+    return f"{prefix}-{random.randint(100,999)}-{random.randint(100,999)}-{random.randint(1000,9999)}"
+
+
+
+#  LEVEL 2 — TOOL: LOCALE-AWARE USER GENERATOR
+
+
+@tool
+def generate_users_locale(
+    count: int,
+    locale: str = "en_US",
+    min_age: int = 18,
+    max_age: int = 65,
+    include_address: bool = True,
+    include_phone: bool = True,
+    include_job: bool = False,
+) -> dict:
+    """
+    Generate locale-aware user records with culturally appropriate names, addresses, and phone numbers.
+
+    Args:
+        count: Number of users to generate (1-500).
+        locale: Locale code. Available: en_US, en_IN, ja_JP, de_DE, fr_FR, es_ES.
+        min_age: Minimum age.
+        max_age: Maximum age.
+        include_address: Include a locale-appropriate address.
+        include_phone: Include a locale-appropriate phone number.
+        include_job: Include jobTitle and department.
+
+    Returns:
+        dict with 'users' list, 'count', and 'locale'.
+    """
+    if count < 1 or count > 500:
+        return {"error": "count must be between 1 and 500."}
+    if locale not in LOCALE_DATA:
+        return {"error": f"Unknown locale '{locale}'. Available: {AVAILABLE_LOCALES}"}
+    if min_age > max_age:
+        return {"error": f"min_age ({min_age}) > max_age ({max_age})."}
+
+    ld = LOCALE_DATA[locale]
+    tld = ld["domain_tld"]
+    users = []
+
+    for i in range(count):
+        first = random.choice(ld["first_names"])
+        last = random.choice(ld["last_names"])
+        domain = f"example{tld}"
+
+        user: dict = {
+            "id": i + 1,
+            "uuid": f"usr-{''.join(random.choices(string.hexdigits[:16], k=8))}-{str(i+1).zfill(4)}",
+            "firstName": first,
+            "lastName": last,
+            "email": f"{first.lower()}.{last.lower()}@{domain}",
+            "username": f"{first.lower()}{random.randint(10, 9999)}",
+            "age": random.randint(min_age, max_age),
+            "locale": locale,
+            "isActive": random.choice([True, True, True, False]),
+            "registeredAt": _rand_date(730),
+            "lastLoginAt": _rand_date(30),
+        }
+        if include_address:
+            user["address"] = _locale_address(locale)
+        if include_phone:
+            user["phone"] = _locale_phone(locale)
+        if include_job:
+            user["jobTitle"] = random.choice(JOB_TITLES)
+            user["department"] = random.choice(DEPARTMENTS)
+        users.append(user)
+
+    return {"users": users, "count": len(users), "locale": locale}
+
+
+
+#  LEVEL 2 — TOOL: RELATIONAL DATASET GENERATOR
+
+@tool
+def generate_relational_dataset(
+    user_count: int = 20,
+    product_count: int = 30,
+    transaction_count: int = 100,
+    review_count: int = 50,
+    locale: str = "en_US",
+    seed: Optional[int] = None,
+) -> dict:
+    """
+    Generate a fully relational dataset where users, products, transactions,
+    and reviews all reference each other with consistent foreign keys.
+
+    Args:
+        user_count: Number of users to generate (1-200).
+        product_count: Number of products to generate (1-200).
+        transaction_count: Number of transactions (1-1000).
+        review_count: Number of reviews (1-500).
+        locale: Locale for user names/addresses. Available: en_US, en_IN, ja_JP, de_DE, fr_FR, es_ES.
+        seed: Optional integer seed for reproducible output. Same seed = same data every time.
+
+    Returns:
+        dict with 'users', 'products', 'transactions', 'reviews', all linked by real IDs.
+    """
+    if seed is not None:
+        random.seed(seed)
+
+    if locale not in LOCALE_DATA:
+        return {"error": f"Unknown locale '{locale}'. Available: {AVAILABLE_LOCALES}"}
+
+    ld = LOCALE_DATA[locale]
+    tld = ld["domain_tld"]
+
+    # — Users —
+    users = []
+    for i in range(user_count):
+        first = random.choice(ld["first_names"])
+        last = random.choice(ld["last_names"])
+        users.append({
+            "id": i + 1,
+            "firstName": first,
+            "lastName": last,
+            "email": f"{first.lower()}.{last.lower()}{i}@example{tld}",
+            "age": random.randint(18, 65),
+            "locale": locale,
+            "address": _locale_address(locale),
+            "phone": _locale_phone(locale),
+            "registeredAt": _rand_date(730),
+        })
+
+    # — Products —
+    products = []
+    for i in range(product_count):
+        adj = random.choice(PRODUCT_ADJECTIVES)
+        noun = random.choice(PRODUCT_NOUNS)
+        price = round(random.uniform(5, 999), 2)
+        products.append({
+            "id": i + 1,
+            "sku": f"SKU-{''.join(random.choices(string.ascii_uppercase, k=3))}-{random.randint(1000,9999)}",
+            "name": f"{adj} {noun} {random.randint(100,9999)}",
+            "category": random.choice(CATEGORIES),
+            "price": price,
+            "stock": random.randint(0, 500),
+            "rating": round(random.uniform(1.0, 5.0), 1),
+        })
+
+    # — Transactions (reference real user & product IDs) —
+    user_ids = [u["id"] for u in users]
+    product_ids = [p["id"] for p in products]
+    transactions = []
+    for i in range(transaction_count):
+        uid = random.choice(user_ids)
+        pid = random.choice(product_ids)
+        product = next(p for p in products if p["id"] == pid)
+        qty = random.randint(1, 5)
+        amount = round(product["price"] * qty, 2)
+        tax = round(amount * 0.08, 2)
+        transactions.append({
+            "id": i + 1,
+            "transactionId": f"TXN-{''.join(random.choices(string.ascii_uppercase + string.digits, k=10))}",
+            "userId": uid,
+            "productId": pid,
+            "productName": product["name"],
+            "quantity": qty,
+            "unitPrice": product["price"],
+            "amount": amount,
+            "tax": tax,
+            "total": round(amount + tax, 2),
+            "status": random.choice(["completed", "completed", "completed", "pending", "refunded"]),
+            "createdAt": _rand_date(365),
+        })
+
+    # — Reviews (reference real user & product IDs, rating matches title) —
+    ratings_pool = [5,5,5,4,4,4,3,3,2,1]
+    reviews = []
+    for i in range(review_count):
+        uid = random.choice(user_ids)
+        pid = random.choice(product_ids)
+        rating = random.choice(ratings_pool)
+        reviews.append({
+            "id": i + 1,
+            "userId": uid,
+            "productId": pid,
+            "rating": rating,
+            "title": random.choice(REVIEW_TITLES[rating]),
+            "body": _lorem(random.randint(15, 30)),
+            "verifiedPurchase": random.choice([True, True, False]),
+            "helpfulVotes": random.randint(0, 100),
+            "createdAt": _rand_date(365),
+        })
+
+    result = {
+        "seed": seed,
+        "locale": locale,
+        "users": users,
+        "products": products,
+        "transactions": transactions,
+        "reviews": reviews,
+        "summary": {
+            "userCount": len(users),
+            "productCount": len(products),
+            "transactionCount": len(transactions),
+            "reviewCount": len(reviews),
+        }
+    }
+
+    # Reset seed after generation
+    if seed is not None:
+        random.seed()
+
+    return result
+
+
+#  LEVEL 2 — TOOL: SEEDED GENERATION WRAPPER
+
+
+@tool
+def generate_with_seed(
+    data_type: str,
+    count: int,
+    seed: int,
+    locale: str = "en_US",
+) -> dict:
+    """
+    Generate any data type with a fixed seed for reproducible output.
+    Same seed + same data_type + same count = identical data every time.
+
+    Args:
+        data_type: One of: users, products, transactions, posts, companies, events, invoices, reviews, locations.
+        count: Number of records to generate.
+        seed: Integer seed value. Use the same seed to reproduce identical results.
+        locale: Locale for user data (only applies to users). Available: en_US, en_IN, ja_JP, de_DE, fr_FR, es_ES.
+
+    Returns:
+        Generated data dict with 'seed' field confirming the seed used.
+    """
+    if data_type not in ["users", "products", "transactions", "posts", "companies",
+                         "events", "invoices", "reviews", "locations"]:
+        return {"error": f"Unknown data_type '{data_type}'. Choose from: users, products, transactions, posts, companies, events, invoices, reviews, locations."}
+
+    random.seed(seed)
+
+    if data_type == "users":
+        ld = LOCALE_DATA.get(locale, LOCALE_DATA["en_US"])
+        tld = ld["domain_tld"]
+        records = []
+        for i in range(min(count, 500)):
+            first = random.choice(ld["first_names"])
+            last = random.choice(ld["last_names"])
+            records.append({
+                "id": i + 1,
+                "firstName": first,
+                "lastName": last,
+                "email": f"{first.lower()}.{last.lower()}{i}@example{tld}",
+                "age": random.randint(18, 65),
+                "locale": locale,
+                "registeredAt": _rand_date(730),
+            })
+        result = {"users": records, "count": len(records)}
+
+    elif data_type == "products":
+        records = []
+        for i in range(min(count, 200)):
+            records.append({
+                "id": i + 1,
+                "sku": f"SKU-{''.join(random.choices(string.ascii_uppercase, k=3))}-{random.randint(1000,9999)}",
+                "name": f"{random.choice(PRODUCT_ADJECTIVES)} {random.choice(PRODUCT_NOUNS)} {random.randint(100,9999)}",
+                "category": random.choice(CATEGORIES),
+                "price": round(random.uniform(5, 999), 2),
+                "stock": random.randint(0, 500),
+            })
+        result = {"products": records, "count": len(records)}
+
+    elif data_type == "reviews":
+        records = []
+        for i in range(min(count, 1000)):
+            rating = random.choice([5,5,4,4,3,2,1])
+            records.append({
+                "id": i + 1,
+                "productId": random.randint(1, 50),
+                "userId": random.randint(1, 100),
+                "rating": rating,
+                "title": random.choice(REVIEW_TITLES[rating]),
+                "body": _lorem(random.randint(15, 30)),
+                "createdAt": _rand_date(365),
+            })
+        result = {"reviews": records, "count": len(records)}
+
+    else:
+        result = {"message": f"Seeded generation for '{data_type}' uses sensible defaults. Use generate_relational_dataset for full relational seeding."}
+
+    random.seed()  # Reset
+    result["seed"] = seed
+    return result
+
+
+
+#  LEVEL 2 — TOOL: CUSTOM SCHEMA FILLER
+
+
+_SCHEMA_TYPE_GENERATORS = {
+    # String field name patterns → generator functions
+    "id":            lambda: random.randint(1, 9999),
+    "uuid":          lambda: f"{''.join(random.choices(string.hexdigits[:16], k=8))}-{''.join(random.choices(string.hexdigits[:16], k=4))}",
+    "name":          lambda: f"{random.choice(['Alice','Bob','Carol','David','Emma','Frank','Grace','Henry'])} {random.choice(['Smith','Jones','Brown','Davis','Wilson'])}",
+    "firstname":     lambda: random.choice(["Alice","Bob","Carol","David","Emma","Frank","Grace","Henry"]),
+    "lastname":      lambda: random.choice(["Smith","Jones","Brown","Davis","Wilson","Garcia","Miller"]),
+    "email":         lambda: f"user{random.randint(1,9999)}@example.com",
+    "phone":         lambda: f"+1-{random.randint(200,999)}-{random.randint(100,999)}-{random.randint(1000,9999)}",
+    "age":           lambda: random.randint(18, 70),
+    "price":         lambda: round(random.uniform(1, 999), 2),
+    "amount":        lambda: round(random.uniform(10, 5000), 2),
+    "total":         lambda: round(random.uniform(10, 5000), 2),
+    "salary":        lambda: round(random.uniform(30000, 200000), 2),
+    "revenue":       lambda: round(random.uniform(10000, 10000000), 2),
+    "score":         lambda: round(random.uniform(0, 100), 1),
+    "rating":        lambda: round(random.uniform(1, 5), 1),
+    "count":         lambda: random.randint(0, 1000),
+    "quantity":      lambda: random.randint(1, 100),
+    "stock":         lambda: random.randint(0, 500),
+    "date":          lambda: _rand_date(730, 0)[:10],
+    "createdat":     lambda: _rand_date(730),
+    "updatedat":     lambda: _rand_date(30),
+    "timestamp":     lambda: _rand_date(365),
+    "url":           lambda: f"https://example.com/{''.join(random.choices(string.ascii_lowercase, k=8))}",
+    "website":       lambda: f"https://www.{''.join(random.choices(string.ascii_lowercase, k=6))}.com",
+    "image":         lambda: f"https://picsum.photos/seed/{random.randint(1,1000)}/400/300",
+    "avatar":        lambda: f"https://i.pravatar.cc/150?u={random.randint(1,5000)}",
+    "title":         lambda: " ".join(w.capitalize() for w in random.choices(LOREM_WORDS, k=random.randint(3,7))),
+    "description":   lambda: _lorem(random.randint(10, 20)),
+    "body":          lambda: _lorem(random.randint(20, 40)),
+    "content":       lambda: _lorem(random.randint(20, 50)),
+    "summary":       lambda: _lorem(random.randint(10, 15)),
+    "notes":         lambda: _lorem(random.randint(5, 12)),
+    "address":       lambda: f"{random.randint(1,999)} Main St, {random.choice(CITIES)}",
+    "city":          lambda: random.choice(CITIES),
+    "country":       lambda: random.choice(COUNTRIES),
+    "zipcode":       lambda: str(random.randint(10000, 99999)),
+    "postalcode":    lambda: str(random.randint(10000, 99999)),
+    "company":       lambda: f"{random.choice(COMPANY_PREFIXES)} {random.choice(COMPANY_SUFFIXES)}",
+    "department":    lambda: random.choice(DEPARTMENTS),
+    "jobtitle":      lambda: random.choice(JOB_TITLES),
+    "role":          lambda: random.choice(["admin", "user", "moderator", "editor", "viewer"]),
+    "status":        lambda: random.choice(["active", "inactive", "pending", "suspended"]),
+    "category":      lambda: random.choice(CATEGORIES),
+    "tag":           lambda: random.choice(["tech","health","finance","education","travel","food"]),
+    "color":         lambda: random.choice(["red","blue","green","yellow","purple","orange","black","white"]),
+    "gender":        lambda: random.choice(["male","female","non-binary","prefer not to say"]),
+    "active":        lambda: random.choice([True, False]),
+    "isactive":      lambda: random.choice([True, True, True, False]),
+    "verified":      lambda: random.choice([True, False]),
+    "enabled":       lambda: random.choice([True, False]),
+    "username":      lambda: f"user{random.randint(100,9999)}",
+    "password":      lambda: "".join(random.choices(string.ascii_letters + string.digits + "!@#$", k=12)),
+    "token":         lambda: "".join(random.choices(string.hexdigits, k=32)),
+    "currency":      lambda: random.choice(["USD","EUR","GBP","JPY","CAD"]),
+    "language":      lambda: random.choice(["en","es","fr","de","ja","zh","ar","pt"]),
+    "latitude":      lambda: round(random.uniform(-90, 90), 6),
+    "longitude":     lambda: round(random.uniform(-180, 180), 6),
+    "ip":            lambda: f"{random.randint(1,255)}.{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(1,254)}",
+    "useragent":     lambda: random.choice([
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1",
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0) Mobile/15E148",
+    ]),
+}
+
+
+def _fill_value(key: str, value) -> object:
+    """Given a key and its template value, return a generated value."""
+    key_lower = key.lower().replace("_", "").replace("-", "")
+
+    # Check exact or partial key match
+    for pattern, gen in _SCHEMA_TYPE_GENERATORS.items():
+        if key_lower == pattern or key_lower.endswith(pattern) or key_lower.startswith(pattern):
+            return gen()
+
+    # Fall back to value type
+    if isinstance(value, bool):
+        return random.choice([True, False])
+    if isinstance(value, int):
+        return random.randint(1, 1000)
+    if isinstance(value, float):
+        return round(random.uniform(0, 1000), 2)
+    if isinstance(value, str):
+        return _lorem(random.randint(3, 8)).rstrip(".")
+    if isinstance(value, list):
+        return [_fill_value(key, value[0]) for _ in range(random.randint(1, 3))] if value else []
+    if isinstance(value, dict):
+        return {k: _fill_value(k, v) for k, v in value.items()}
+    return None
+
+
+@tool
+def fill_custom_schema(schema: dict, count: int = 10, seed: Optional[int] = None) -> dict:
+    """
+    Fill a custom JSON schema template with realistic generated data.
+    Pass ONE example record as the schema — DataForge will generate `count` records matching it.
+
+    Example schema:
+    {
+      "userId": 1,
+      "fullName": "string",
+      "email": "string",
+      "age": 0,
+      "isActive": true,
+      "score": 0.0,
+      "createdAt": "string"
+    }
+
+    Args:
+        schema: A dict representing ONE record template. Keys drive what data is generated.
+        count: Number of records to generate (1-500).
+        seed: Optional seed for reproducibility.
+
+    Returns:
+        dict with 'records' list and 'count'.
+    """
+    if not isinstance(schema, dict):
+        return {"error": "schema must be a JSON object (dict)."}
+    if count < 1 or count > 500:
+        return {"error": "count must be between 1 and 500."}
+
+    if seed is not None:
+        random.seed(seed)
+
+    records = []
+    for i in range(count):
+        record = {}
+        for key, value in schema.items():
+            # Auto-increment id-like fields
+            key_lower = key.lower().replace("_", "")
+            if key_lower in ("id", "userid", "productid") and isinstance(value, int):
+                record[key] = i + 1
+            else:
+                record[key] = _fill_value(key, value)
+        records.append(record)
+
+    if seed is not None:
+        random.seed()
+
+    return {"records": records, "count": len(records), "seed": seed}
+
+
 #  Agent Setup
-# ─────────────────────────────────────────────
+
 
 TOOLS = [
     # I/O
@@ -942,6 +1483,8 @@ TOOLS = [
     # Generators
     generate_users, generate_products, generate_transactions, generate_posts,
     generate_companies, generate_events, generate_invoices, generate_reviews, generate_locations,
+    # Level 2
+    generate_users_locale, generate_relational_dataset, generate_with_seed, fill_custom_schema,
     # Utilities
     summarize_json, merge_json_files,
 ]
@@ -951,6 +1494,7 @@ llm = ChatOpenAI(model="gpt-4o", temperature=0)
 SYSTEM_MESSAGE = """You are DataForge, a powerful assistant for generating realistic sample datasets.
 
 ## Capabilities
+### Level 1 — Data Types
 - **Users**: realistic people with optional address, phone, job info
 - **Products**: e-commerce catalogue items with inventory
 - **Transactions**: financial order records linked to users/products
@@ -960,6 +1504,10 @@ SYSTEM_MESSAGE = """You are DataForge, a powerful assistant for generating reali
 - **Invoices**: detailed invoices with line items, tax, due dates
 - **Reviews**: product reviews with star ratings and vote counts
 - **Locations**: cities worldwide with coordinates, timezone, population
+- **Locale users**: culturally accurate names/addresses for en_US, en_IN, ja_JP, de_DE, fr_FR, es_ES
+- **Relational datasets**: users + products + transactions + reviews with real matching foreign keys
+- **Seeded generation**: same seed = identical data every time (reproducible)
+- **Custom schema filler**: paste any JSON schema and DataForge fills it with realistic values
 - **Files**: read/write JSON and CSV, summarise schemas, merge files
 
 ## Behaviour Rules
@@ -992,9 +1540,9 @@ SYSTEM_MESSAGE = """You are DataForge, a powerful assistant for generating reali
 agent = create_react_agent(llm, TOOLS, prompt=SYSTEM_MESSAGE)
 
 
-# ─────────────────────────────────────────────
+
 #  Runner
-# ─────────────────────────────────────────────
+
 
 def run_agent(user_input: str, history: List[BaseMessage]) -> AIMessage:
     """Execute one turn with full tool-calling loop via LangGraph."""
@@ -1008,17 +1556,18 @@ def run_agent(user_input: str, history: List[BaseMessage]) -> AIMessage:
         return AIMessage(content=f"⚠️  Error: {e}\n\nPlease try rephrasing or provide more details.")
 
 
-# ─────────────────────────────────────────────
+
 #  CLI
-# ─────────────────────────────────────────────
+
 
 BANNER = r"""
 ╔════════════════════════════════════════════════════════════════════╗
 ║         🔥  DataForge  —  Craft Data. Forge Datasets.             ║
 ╠════════════════════════════════════════════════════════════════════╣
-║  users · products · transactions · posts · companies · events      ║
-║  invoices · reviews · locations                                    ║
-║  export: JSON · CSV  │  inspect · merge · summarize                ║
+║  L1: users · products · transactions · posts · companies · events  ║
+║      invoices · reviews · locations                                ║
+║  L2: locale users · relational datasets · seeds · custom schemas  ║
+║  export: JSON · CSV  │  inspect · merge · summarize               ║
 ╚════════════════════════════════════════════════════════════════════╝
 """
 
@@ -1035,6 +1584,11 @@ EXAMPLES = [
     "Summarise data/invoices.json",
     "Merge data/users.json and data/companies.json into data/combined.json",
     "List all files in the data/ directory",
+    "--- Level 2 ---",
+    "Generate 30 Indian users with locale en_IN and save to data/users_india.json",
+    "Generate 20 Japanese users with locale ja_JP and save to data/users_japan.json",
+    "Generate a relational dataset with 20 users 30 products 100 transactions, save to data/relational.json",
+    "Generate 50 users with seed 42 and save to data/users_seed42.json",
 ]
 
 
