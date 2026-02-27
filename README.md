@@ -1,4 +1,4 @@
-# DataForge
+# 🔥 DataForge
 
 > **Craft Data. Forge Datasets.**
 
@@ -7,6 +7,8 @@ DataForge is an AI-powered CLI tool that generates realistic sample datasets for
 ---
 
 ## ✨ Features
+
+### Level 1 — Data Types
 
 | Data Type | Fields Generated |
 |---|---|
@@ -20,6 +22,17 @@ DataForge is an AI-powered CLI tool that generates realistic sample datasets for
 | ⭐ **Reviews** | star rating, title, body, verified purchase, votes |
 | 🌍 **Locations** | city, country, lat/lng, timezone, population |
 
+### Level 2 — Smart Generation
+
+| Feature | Description |
+|---|---|
+| 🌐 **Locale-Aware Users** | Culturally accurate names, addresses & phone numbers for 6 locales |
+| 🔗 **Relational Datasets** | Users + products + transactions + reviews with real matching foreign keys |
+| 🌱 **Seeded Generation** | Same seed = identical data every time — perfect for tests |
+| 📋 **Custom Schema Filler** | Paste your own JSON schema and get realistic data back |
+
+**Supported locales:** `en_US` · `en_IN` · `ja_JP` · `de_DE` · `fr_FR` · `es_ES`
+
 **Export formats:** JSON · CSV  
 **Utilities:** summarize schema · merge files · list outputs
 
@@ -29,8 +42,8 @@ DataForge is an AI-powered CLI tool that generates realistic sample datasets for
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/YOUR_USERNAME/dataforge.git
-cd dataforge
+git clone https://github.com/srishtichawla/DataForge.git
+cd DataForge
 ```
 
 ### 2. Create a virtual environment
@@ -60,6 +73,7 @@ python3 main.py
 
 ## 💬 Example Commands
 
+### Level 1
 ```
 Generate 50 users with job info and save to data/users.json
 Create 30 products between $10-$200 and export as CSV to data/products.csv
@@ -70,6 +84,19 @@ Create 10 upcoming events with speakers and tickets, save to data/events.json
 Generate 25 invoices with 3 line items each, save to data/invoices.json
 Make 200 product reviews and save to data/reviews.json
 Generate 30 locations from USA and UK, save to data/locations.json
+```
+
+### Level 2
+```
+Generate 30 Indian users with locale en_IN, save to data/users_india.json
+Generate 20 Japanese users with locale ja_JP, save to data/users_japan.json
+Generate a relational dataset with 20 users, 30 products, 100 transactions, save to data/relational.json
+Generate 50 users with seed 42 and save to data/users_seed42.json
+Fill this schema with 20 records: {"userId": 1, "fullName": "string", "email": "string", "score": 0.0}
+```
+
+### Utilities
+```
 Summarise data/users.json
 Merge data/users.json and data/companies.json into data/combined.json
 List all files in the data/ directory
@@ -101,7 +128,7 @@ You ──▶ Natural language input
 ## 📁 Project Structure
 
 ```
-dataforge/
+DataForge/
 ├── main.py          # Main agent script
 ├── .env             # Your API key (never commit this!)
 ├── .gitignore       # Ignores .env and data/ folder
@@ -130,7 +157,8 @@ git status   # .env should NOT appear here
 
 ## 🗺️ Roadmap
 
-- [ ] Level 2 — Relational data with real foreign keys
+- [x] Level 1 — 9 data types (users, products, transactions, posts, companies, events, invoices, reviews, locations)
+- [x] Level 2 — Locale support, relational datasets, seeded generation, custom schema filler
 - [ ] Level 3 — SQL INSERT export + Excel (.xlsx)
 - [ ] Level 4 — Web UI (FastAPI + React)
 - [ ] Level 5 — Custom schema input ("describe your database")
@@ -138,16 +166,4 @@ git status   # .env should NOT appear here
 
 ---
 
-## 🤝 Contributing
 
-Pull requests are welcome! For major changes, open an issue first to discuss what you'd like to change.
-
----
-
-## 📄 License
-
-MIT License — use freely, credit appreciated.
-
----
-
-<p align="center">Built with 🔥 by DataForge</p>

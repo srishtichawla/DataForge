@@ -16,9 +16,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-
+# ─────────────────────────────────────────────
 #  Helpers
-
+# ─────────────────────────────────────────────
 
 LOREM_WORDS = (
     "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor "
@@ -76,9 +76,9 @@ def _lorem(words: int) -> str:
     return " ".join(chosen) + "."
 
 
-
+# ─────────────────────────────────────────────
 #  File I/O Tools
-
+# ─────────────────────────────────────────────
 
 @tool
 def write_json(filepath: str, data: dict) -> str:
@@ -162,9 +162,9 @@ def list_output_files(directory: str = ".") -> str:
         return f"Error: {e}"
 
 
-
+# ─────────────────────────────────────────────
 #  User Generator
-
+# ─────────────────────────────────────────────
 
 @tool
 def generate_users(
@@ -247,8 +247,9 @@ def generate_users(
     return {"users": users, "count": len(users)}
 
 
-
+# ─────────────────────────────────────────────
 #  Product Generator
+# ─────────────────────────────────────────────
 
 @tool
 def generate_products(
@@ -309,9 +310,9 @@ def generate_products(
     return {"products": products, "count": len(products)}
 
 
-
+# ─────────────────────────────────────────────
 #  Transaction Generator
-
+# ─────────────────────────────────────────────
 
 @tool
 def generate_transactions(
@@ -365,7 +366,10 @@ def generate_transactions(
 
     return {"transactions": transactions, "count": len(transactions)}
 
+
+# ─────────────────────────────────────────────
 #  Post / Blog Generator
+# ─────────────────────────────────────────────
 
 @tool
 def generate_posts(
@@ -430,8 +434,9 @@ def generate_posts(
     return {"posts": posts, "count": len(posts)}
 
 
-
+# ─────────────────────────────────────────────
 #  Company Generator
+# ─────────────────────────────────────────────
 
 INDUSTRIES = [
     "Technology", "Healthcare", "Finance", "Retail", "Manufacturing",
@@ -515,9 +520,9 @@ def generate_companies(
     return {"companies": companies, "count": len(companies)}
 
 
-
+# ─────────────────────────────────────────────
 #  Event Generator
-
+# ─────────────────────────────────────────────
 
 EVENT_TYPES = ["Conference", "Webinar", "Workshop", "Meetup", "Hackathon", "Summit", "Training", "Networking", "Launch", "AMA"]
 EVENT_TOPICS = ["AI & Machine Learning", "Web Development", "Cybersecurity", "Data Science", "Design",
@@ -609,9 +614,9 @@ def generate_events(
     return {"events": events, "count": len(events)}
 
 
-
+# ─────────────────────────────────────────────
 #  Invoice Generator
-
+# ─────────────────────────────────────────────
 
 SERVICE_ITEMS = [
     "Consulting Services", "Software Development", "Design Work", "Data Analysis",
@@ -695,8 +700,9 @@ def generate_invoices(
     return {"invoices": invoices, "count": len(invoices)}
 
 
-
+# ─────────────────────────────────────────────
 #  Review Generator
+# ─────────────────────────────────────────────
 
 REVIEW_TITLES = {
     5: ["Absolutely amazing!", "Best purchase ever!", "Highly recommend!", "Exceeded expectations!", "Five stars!"],
@@ -760,9 +766,9 @@ def generate_reviews(
     return {"reviews": reviews, "count": len(reviews), "averageRating": avg}
 
 
-
+# ─────────────────────────────────────────────
 #  Location Generator
-
+# ─────────────────────────────────────────────
 
 WORLD_LOCATIONS = [
     ("New York", "USA", 40.7128, -74.0060, "America/New_York", 8_336_817),
@@ -845,9 +851,9 @@ def generate_locations(
 
     return {"locations": locations, "count": len(locations)}
 
-
+# ─────────────────────────────────────────────
 #  Schema Inspector / Merger
-
+# ─────────────────────────────────────────────
 
 @tool
 def summarize_json(filepath: str) -> str:
@@ -926,8 +932,11 @@ def merge_json_files(input_files: List[str], output_file: str, merge_key: str = 
         return f"Error merging files: {e}"
 
 
+# ─────────────────────────────────────────────
 
+# ═════════════════════════════════════════════
 #  LEVEL 2 — LOCALE DATA POOLS
+# ═════════════════════════════════════════════
 
 LOCALE_DATA = {
     "en_US": {
@@ -1037,9 +1046,9 @@ def _locale_phone(locale: str) -> str:
     return f"{prefix}-{random.randint(100,999)}-{random.randint(100,999)}-{random.randint(1000,9999)}"
 
 
-
+# ═════════════════════════════════════════════
 #  LEVEL 2 — TOOL: LOCALE-AWARE USER GENERATOR
-
+# ═════════════════════════════════════════════
 
 @tool
 def generate_users_locale(
@@ -1107,8 +1116,9 @@ def generate_users_locale(
     return {"users": users, "count": len(users), "locale": locale}
 
 
-
+# ═════════════════════════════════════════════
 #  LEVEL 2 — TOOL: RELATIONAL DATASET GENERATOR
+# ═════════════════════════════════════════════
 
 @tool
 def generate_relational_dataset(
@@ -1243,8 +1253,9 @@ def generate_relational_dataset(
     return result
 
 
+# ═════════════════════════════════════════════
 #  LEVEL 2 — TOOL: SEEDED GENERATION WRAPPER
-
+# ═════════════════════════════════════════════
 
 @tool
 def generate_with_seed(
@@ -1326,9 +1337,9 @@ def generate_with_seed(
     return result
 
 
-
+# ═════════════════════════════════════════════
 #  LEVEL 2 — TOOL: CUSTOM SCHEMA FILLER
-
+# ═════════════════════════════════════════════
 
 _SCHEMA_TYPE_GENERATORS = {
     # String field name patterns → generator functions
@@ -1473,9 +1484,9 @@ def fill_custom_schema(schema: dict, count: int = 10, seed: Optional[int] = None
 
     return {"records": records, "count": len(records), "seed": seed}
 
-
+# ─────────────────────────────────────────────
 #  Agent Setup
-
+# ─────────────────────────────────────────────
 
 TOOLS = [
     # I/O
@@ -1540,9 +1551,9 @@ SYSTEM_MESSAGE = """You are DataForge, a powerful assistant for generating reali
 agent = create_react_agent(llm, TOOLS, prompt=SYSTEM_MESSAGE)
 
 
-
+# ─────────────────────────────────────────────
 #  Runner
-
+# ─────────────────────────────────────────────
 
 def run_agent(user_input: str, history: List[BaseMessage]) -> AIMessage:
     """Execute one turn with full tool-calling loop via LangGraph."""
@@ -1556,9 +1567,9 @@ def run_agent(user_input: str, history: List[BaseMessage]) -> AIMessage:
         return AIMessage(content=f"⚠️  Error: {e}\n\nPlease try rephrasing or provide more details.")
 
 
-
+# ─────────────────────────────────────────────
 #  CLI
-
+# ─────────────────────────────────────────────
 
 BANNER = r"""
 ╔════════════════════════════════════════════════════════════════════╗
